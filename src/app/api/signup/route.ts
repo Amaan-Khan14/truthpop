@@ -15,9 +15,10 @@ export async function POST(req: Request) {
 
     if (existingUserByUsername) {
       return Response.json({
-        status: 400,
         success: false,
         message: "Username already exists",
+      }, {
+        status: 400,
       });
     }
 
@@ -30,9 +31,11 @@ export async function POST(req: Request) {
     if (existingUserByEmail) {
       if (existingUserByEmail.isVerified) {
         return Response.json({
-          status: 400,
+
           success: false,
           message: "Email already exists",
+        }, {
+          status: 400,
         });
       } else {
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -66,22 +69,25 @@ export async function POST(req: Request) {
 
     if (!responseEmail.success) {
       return Response.json({
-        status: 400,
         success: false,
         message: "Error sending verification email",
+      }, {
+        status: 500,
       });
     }
 
     return Response.json({
-      status: 200,
       success: true,
       message: "User created successfully",
+    }, {
+      status: 201,
     });
   } catch (err) {
     return Response.json({
-      status: 500,
       success: false,
       message: "Internal server error",
+    }, {
+      status: 500,
     });
   }
 }
