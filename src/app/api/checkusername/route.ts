@@ -13,21 +13,19 @@ export async function GET(req: NextRequest) {
     try {
         const { searchParams } = new URL(req.url);
 
+        let username = searchParams.get("username");
+        console.log(username);
         const queryParam = {
-            username: searchParams.get("username")
+            username
         }
 
         const result = usernameValidator.safeParse(queryParam);
 
         if (!result.success) {
 
-            const error = result.error.format().username?._errors || [];
-
             return Response.json({
                 success: false,
-                message: error.length ? error.join(', ') : "Invalid username",
-            }, {
-                status: 400
+                message: "Invalid username",
             })
         }
 
@@ -40,8 +38,6 @@ export async function GET(req: NextRequest) {
             return Response.json({
                 success: false,
                 message: "Username already exists",
-            }, {
-                status: 400,
             });
         }
 
