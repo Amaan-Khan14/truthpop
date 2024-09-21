@@ -11,6 +11,8 @@ import { set } from "mongoose";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/apiResponse";
 import { signUpSchema } from "@/validator/signUp";
+import TopLeftSVG from "../../left.svg";
+import BottomRightSVG from "../../right.svg";
 import {
   Form,
   FormControl,
@@ -24,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function Component() {
   const [username, setUsername] = useState("");
@@ -102,7 +105,7 @@ export default function Component() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#101c3f] via-slate-900 to-slate-800 relative overflow-hidden">
+    <div className="flex justify-center items-center min-h-screen bg-[#141519]">
       {/* <div
         className="absolute inset-0 bg-repeat opacity-10"
         style={{
@@ -110,11 +113,19 @@ export default function Component() {
             "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
         }}
       ></div> */}
-      <Card className="mx-2 w-full max-w-md p-8 bg-white bg-opacity-20 backdrop-filter backdrop-blur-2xl border border-opacity-30 border-white rounded-2xl shadow-xl">
+      <Image
+        src={BottomRightSVG}
+        alt="Decorative shape"
+        className="absolute top-4 left-0 w-1/4 h-auto sm:block hidden"
+      />
+      <Image
+        src={TopLeftSVG}
+        alt="Decorative shape"
+        className="absolute bottom-0 right-0 w-1/3 h-auto sm:block hidden"
+      />
+      <div className="mx-2 w-full max-w-sm p-4">
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-center text-white">
-            Sign Up
-          </h2>
+          <h1 className="text-4xl font-bold text-center text-white">Sign Up</h1>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
@@ -122,15 +133,12 @@ export default function Component() {
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-white">
-                      Username
-                    </FormLabel>
                     <div className="relative">
                       <FormControl>
                         <Input
                           type="text"
-                          placeholder="Enter your username"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="Username"
+                          className="focus:bg-black/10 text-white bg-op w-full bg-inherit px-3 py-2 border border-gray-500 rounded-md"
                           {...field}
                           onChange={(event) => {
                             field.onChange(event);
@@ -161,14 +169,11 @@ export default function Component() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-white">
-                      Email
-                    </FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="Enter your email"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="Email"
+                        className="focus:bg-black/10 text-white  bg-op w-full px-3 py-2 border border-gray-500 bg-inherit rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         {...field}
                       />
                     </FormControl>
@@ -180,14 +185,11 @@ export default function Component() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-white">
-                      Password
-                    </FormLabel>
                     <FormControl>
                       <Input
                         type="password"
-                        placeholder="Enter your password"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="Password"
+                        className="focus:bg-black/10 text-white w-full px-3 py-2 border border-gray-500 bg-inherit rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         {...field}
                       />
                     </FormControl>
@@ -222,7 +224,7 @@ export default function Component() {
             </p>
           </div>
         </div>
-      </Card>
+      </div>
     </div>
   );
 }

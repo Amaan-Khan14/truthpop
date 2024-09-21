@@ -15,6 +15,8 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import TopLeftSVG from "../../../left.svg";
+import BottomRightSVG from "../../../right.svg";
 import { useToast } from "@/hooks/use-toast";
 import { ApiResponse } from "@/types/apiResponse";
 import { verifySchema } from "@/validator/verify";
@@ -26,6 +28,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import Image from "next/image";
 
 export default function VerifyPage() {
   const router = useRouter();
@@ -65,8 +68,18 @@ export default function VerifyPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#101c3f] via-slate-900 to-slate-800">
-      <Card className="mx-2 w-full max-w-md p-6 sm:p-8 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-opacity-20 border-white rounded-2xl shadow-2xl">
+    <div className="flex justify-center items-center min-h-screen bg-[#141519]">
+      <Image
+        src={BottomRightSVG}
+        alt="Decorative shape"
+        className="absolute top-4 left-0 w-1/4 h-auto sm:block hidden"
+      />
+      <Image
+        src={TopLeftSVG}
+        alt="Decorative shape"
+        className="absolute bottom-0 right-0 w-1/3 h-auto sm:block hidden"
+      />
+      <div className="mx-2 w-full max-w-sm p-4">
         <div className="space-y-6">
           <h2 className="text-2xl sm:text-3xl font-bold text-center text-white">
             Verify Your Account
@@ -150,7 +163,7 @@ export default function VerifyPage() {
             </Button>
           </form>
         </Form>
-      </Card>
+      </div>
     </div>
   );
 }

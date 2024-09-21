@@ -15,10 +15,13 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
+import TopLeftSVG from "../../left.svg";
+import BottomRightSVG from "../../right.svg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 
 export default function SignInComponent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -67,11 +70,21 @@ export default function SignInComponent() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#101c3f] via-slate-900 to-slate-800">
-      <Card className="mx-2 w-full max-w-md p-8 bg-white bg-opacity-20 backdrop-filter backdrop-blur-2xl border border-opacity-30 border-white rounded-2xl shadow-xl">
-        <h2 className="text-2xl font-bold text-center text-white mb-6">
-          Sign In
-        </h2>
+    <div className="flex justify-center items-center min-h-screen bg-[#141519]">
+      <Image
+        src={BottomRightSVG}
+        alt="Decorative shape"
+        className="absolute top-4 left-0 w-1/4 h-auto sm:block hidden"
+      />
+      <Image
+        src={TopLeftSVG}
+        alt="Decorative shape"
+        className="absolute bottom-0 right-0 w-1/3 h-auto sm:block hidden"
+      />
+      <div className="mx-2 w-full max-w-sm p-4">
+        <h1 className="text-3xl font-semibold text-center text-white mb-6">
+          Log in to your account
+        </h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
@@ -79,14 +92,11 @@ export default function SignInComponent() {
               name="identifier"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-white">
-                    Email/Username
-                  </FormLabel>
                   <FormControl>
                     <Input
                       type="text"
-                      placeholder="Enter your email/username"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      placeholder="Email/Username"
+                      className="w-full bg-inherit px-3 py-2 border shadow-[0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)] border-gray-300 rounded-md focus:bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       {...field}
                     />
                   </FormControl>
@@ -98,14 +108,11 @@ export default function SignInComponent() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-white">
-                    Password
-                  </FormLabel>
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="Enter your password"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      placeholder="Password"
+                      className="w-full bg-inherit px-3 py-2 border border-gray-300 rounded-md focus:bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       {...field}
                     />
                   </FormControl>
@@ -122,7 +129,7 @@ export default function SignInComponent() {
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
                 </>
               ) : (
-                "Sign In"
+                "Sign Up"
               )}
             </Button>
           </form>
@@ -136,7 +143,7 @@ export default function SignInComponent() {
             Sign Up
           </a>
         </p>
-      </Card>
+      </div>
     </div>
   );
 }
