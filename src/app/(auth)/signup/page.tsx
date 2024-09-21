@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 export default function Component() {
   const [username, setUsername] = useState("");
@@ -51,7 +52,7 @@ export default function Component() {
         setUsernameMessage("");
         try {
           const res = await axios.get(
-            `/api/checkusername?username=${username}`
+            `/api/check-username?username=${username}`
           );
           setUsernameMessage(res.data.message);
         } catch (error) {
@@ -101,40 +102,57 @@ export default function Component() {
   };
 
   return (
-    <div>
-      <div>
-        <div className="">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#101c3f] via-slate-900 to-slate-800 relative overflow-hidden">
+      {/* <div
+        className="absolute inset-0 bg-repeat opacity-10"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+        }}
+      ></div> */}
+      <Card className="mx-2 w-full max-w-md p-8 bg-white bg-opacity-20 backdrop-filter backdrop-blur-2xl border border-opacity-30 border-white rounded-2xl shadow-xl">
+        <div className="space-y-6">
+          <h2 className="text-2xl font-bold text-center text-white">
+            Sign Up
+          </h2>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="shadcn"
-                        {...field}
-                        onChange={(event) => {
-                          field.onChange(event);
-                          debouncedUsername(event.target.value);
-                        }}
-                      />
-                    </FormControl>
-                    {isCheckingUsername ? (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    ) : null}
-                    <p
-                      className={
-                        usernamMessage === "Username is available"
-                          ? "text-green-500"
-                          : "text-red-500"
-                      }
-                    >
-                      {usernamMessage}
-                    </p>
+                    <FormLabel className="text-sm font-medium text-white">
+                      Username
+                    </FormLabel>
+                    <div className="relative">
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Enter your username"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          {...field}
+                          onChange={(event) => {
+                            field.onChange(event);
+                            debouncedUsername(event.target.value);
+                          }}
+                        />
+                      </FormControl>
+                      {isCheckingUsername && (
+                        <Loader2 className="absolute right-3 top-1 w-4 animate-spin text-white" />
+                      )}
+                    </div>
+                    {usernamMessage && (
+                      <p
+                        className={`mt-1 text-sm ${
+                          usernamMessage === "Username is available"
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                      >
+                        {usernamMessage}
+                      </p>
+                    )}
                   </FormItem>
                 )}
               />
@@ -143,9 +161,16 @@ export default function Component() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="text-sm font-medium text-white">
+                      Email
+                    </FormLabel>
                     <FormControl>
-                      <Input type="text" placeholder="shadcn" {...field} />
+                      <Input
+                        type="email"
+                        placeholder="Enter your email"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
@@ -155,14 +180,25 @@ export default function Component() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel className="text-sm font-medium text-white">
+                      Password
+                    </FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="shadcn" {...field} />
+                      <Input
+                        type="password"
+                        placeholder="Enter your password"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
@@ -174,16 +210,19 @@ export default function Component() {
               </Button>
             </form>
           </Form>
-          <div>
-            <p>
+          <div className="text-center">
+            <p className="text-sm text-white">
               Already have an account?{" "}
-              <a href="/signin" className="text-blue-500">
+              <a
+                href="/signin"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
                 Sign In
               </a>
             </p>
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   );
 }
