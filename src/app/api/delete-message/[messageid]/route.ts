@@ -50,6 +50,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { messageid
             status: 200
         })
     } catch (error) {
+        console.error(error)
         return Response.json({
             success: false,
             message: "Error deleting message"

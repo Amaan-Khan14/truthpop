@@ -3,6 +3,7 @@ import { getServerSession, User } from "next-auth";
 import { NextRequest } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/option";
 import { UserModel } from "@/model/user";
+import mongoose from "mongoose";
 
 export async function POST(req: NextRequest) {
     await dbConnect();
@@ -19,13 +20,14 @@ export async function POST(req: NextRequest) {
         })
     }
 
-    const userId = user._id
+    const userId = new mongoose.Types.ObjectId(user._id)
+
     const { isAcceptingMessages } = await req.json()
     try {
         const updatedUser = await UserModel.findByIdAndUpdate({
-            userId
+            _id: userId
         }, {
-            isAcceptingMessages
+            isAcceptingMessages: isAcceptingMessages
         }, {
             new: true
         })
