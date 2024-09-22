@@ -19,9 +19,10 @@ import TopLeftSVG from "../../left.svg";
 import BottomRightSVG from "../../right.svg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Loader2, Lock, Mail } from "lucide-react";
 import Image from "next/image";
+import Anonymous from "../../../../public/anonymous.png";
 
 export default function SignInComponent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -71,6 +72,10 @@ export default function SignInComponent() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#141519]">
+      <div className="absolute top-5 left-0 flex items-center px-10">
+        <Image src={Anonymous} alt="Truth Pop Logo" width={60} height={60} />
+        <span className="text-2xl font-bold text-white">TruthPop</span>
+      </div>
       <Image
         src={BottomRightSVG}
         alt="Decorative shape"
@@ -81,69 +86,88 @@ export default function SignInComponent() {
         alt="Decorative shape"
         className="absolute bottom-0 right-0 w-1/3 h-auto sm:block hidden"
       />
-      <div className="mx-2 w-full max-w-sm p-4">
-        <h1 className="text-3xl font-semibold text-center text-white mb-6">
-          Log in to your account
-        </h1>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="identifier"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="Email/Username"
-                      className="w-full bg-inherit px-3 py-2 border shadow-[0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)] border-gray-300 rounded-md focus:bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                      {...field}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      className="w-full bg-inherit px-3 py-2 border border-gray-300 rounded-md focus:bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                      {...field}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
-                </>
-              ) : (
-                "Sign Up"
-              )}
-            </Button>
-          </form>
-        </Form>
-        <p className="mt-4 text-sm text-center text-white">
-          Not a member yet?{" "}
-          <a
-            href="/signup"
-            className="font-medium text-indigo-300 hover:text-indigo-200"
-          >
-            Sign Up
-          </a>
-        </p>
-      </div>
+      <Card className="mx-2 w-full max-w-md backdrop-blur-md bg-white/10 border border-white/20 shadow-xl">
+        <CardContent className="p-6 space-y-6">
+          <h1 className="text-4xl font-bold text-center text-white">
+            Log in to your account
+          </h1>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="identifier"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="relative">
+                        <Mail
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={18}
+                        />
+                        <Input
+                          type="text"
+                          placeholder="Email/Username"
+                          className=" focus:bg-black/10 text-white bg-white/5 w-full px-10 py-2 border border-gray-500 rounded-md"
+                          {...field}
+                        />
+                      </div>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="relative">
+                        <Lock
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={18}
+                        />
+                        <Input
+                          type="password"
+                          placeholder="Password"
+                          className=" focus:bg-black/10 text-white bg-white/5 w-full px-10 py-2 border border-gray-500 rounded-md"
+                          {...field}
+                        />
+                      </div>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
+                    wait
+                  </>
+                ) : (
+                  "Sign In"
+                )}
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+        <CardFooter className="bg-black/20 rounded-b-lg">
+          <div className="w-full text-center mt-5">
+            <p className="text-sm text-white">
+              Don't have an account?{" "}
+              <a
+                href="/signup"
+                className="font-medium text-indigo-300 hover:text-indigo-200 transition-colors"
+              >
+                Sign Up
+              </a>
+            </p>
+          </div>
+        </CardFooter>
+      </Card>
     </div>
   );
 }

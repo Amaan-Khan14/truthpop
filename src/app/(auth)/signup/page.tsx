@@ -24,13 +24,14 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2 } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { Link, Loader2, Lock, Mail, User } from "lucide-react";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import Anonymous from "../../../../public/anonymous.png";
 
 export default function Component() {
   const [username, setUsername] = useState("");
-  const [usernamMessage, setUsernameMessage] = useState("");
+  const [usernameMessage, setUsernameMessage] = useState("");
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -106,25 +107,26 @@ export default function Component() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#141519]">
-      {/* <div
-        className="absolute inset-0 bg-repeat opacity-10"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-        }}
-      ></div> */}
+      <div className="absolute top-5 left-0 flex items-center px-10">
+        <Image src={Anonymous} alt="Truth Pop Logo" width={60} height={60} />
+        <span className="text-2xl font-bold text-white">TruthPop</span>
+      </div>
       <Image
         src={BottomRightSVG}
         alt="Decorative shape"
+        width={250}
+        height={250}
         className="absolute top-4 left-0 w-1/4 h-auto sm:block hidden"
       />
       <Image
         src={TopLeftSVG}
         alt="Decorative shape"
+        width={30}
+        height={300}
         className="absolute bottom-0 right-0 w-1/3 h-auto sm:block hidden"
       />
-      <div className="mx-2 w-full max-w-sm p-4">
-        <div className="space-y-6">
+      <Card className="mx-2 w-full max-w-md backdrop-blur-md bg-white/10 border border-white/20 shadow-xl">
+        <CardContent className="p-6 space-y-6">
           <h1 className="text-4xl font-bold text-center text-white">Sign Up</h1>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -135,30 +137,36 @@ export default function Component() {
                   <FormItem>
                     <div className="relative">
                       <FormControl>
-                        <Input
-                          type="text"
-                          placeholder="Username"
-                          className="focus:bg-black/10 text-white bg-op w-full bg-inherit px-3 py-2 border border-gray-500 rounded-md"
-                          {...field}
-                          onChange={(event) => {
-                            field.onChange(event);
-                            debouncedUsername(event.target.value);
-                          }}
-                        />
+                        <div className="relative">
+                          <User
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                            size={18}
+                          />
+                          <Input
+                            type="text"
+                            placeholder="Username"
+                            className=" focus:bg-black/10 px-10 text-white bg-white/5 w-full py-2 border border-gray-500 rounded-md"
+                            {...field}
+                            onChange={(event) => {
+                              field.onChange(event);
+                              debouncedUsername(event.target.value);
+                            }}
+                          />
+                        </div>
                       </FormControl>
                       {isCheckingUsername && (
-                        <Loader2 className="absolute right-3 top-1 w-4 animate-spin text-white" />
+                        <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 animate-spin text-white" />
                       )}
                     </div>
-                    {usernamMessage && (
+                    {usernameMessage && (
                       <p
                         className={`mt-1 text-sm ${
-                          usernamMessage === "Username is available"
-                            ? "text-green-600"
-                            : "text-red-600"
+                          usernameMessage === "Username is available"
+                            ? "text-green-400"
+                            : "text-red-400"
                         }`}
                       >
-                        {usernamMessage}
+                        {usernameMessage}
                       </p>
                     )}
                   </FormItem>
@@ -170,12 +178,18 @@ export default function Component() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="Email"
-                        className="focus:bg-black/10 text-white  bg-op w-full px-3 py-2 border border-gray-500 bg-inherit rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                        {...field}
-                      />
+                      <div className="relative">
+                        <Mail
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={18}
+                        />
+                        <Input
+                          type="email"
+                          placeholder="Email"
+                          className=" focus:bg-black/10 text-white bg-white/5 w-full px-10 py-2 border border-gray-500 rounded-md"
+                          {...field}
+                        />
+                      </div>
                     </FormControl>
                   </FormItem>
                 )}
@@ -186,12 +200,18 @@ export default function Component() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Password"
-                        className="focus:bg-black/10 text-white w-full px-3 py-2 border border-gray-500 bg-inherit rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                        {...field}
-                      />
+                      <div className="relative">
+                        <Lock
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={18}
+                        />
+                        <Input
+                          type="password"
+                          placeholder="Password"
+                          className=" focus:bg-black/10 text-white bg-white/5 w-full px-10 py-2 border border-gray-500 rounded-md"
+                          {...field}
+                        />
+                      </div>
                     </FormControl>
                   </FormItem>
                 )}
@@ -212,19 +232,21 @@ export default function Component() {
               </Button>
             </form>
           </Form>
-          <div className="text-center">
+        </CardContent>
+        <CardFooter className="bg-black/20 rounded-b-lg">
+          <div className="w-full text-center mt-5">
             <p className="text-sm text-white">
               Already have an account?{" "}
               <a
                 href="/signin"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
+                className="font-medium text-indigo-300 hover:text-indigo-200 transition-colors"
               >
                 Sign In
               </a>
             </p>
           </div>
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
     </div>
   );
 }

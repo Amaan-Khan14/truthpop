@@ -57,14 +57,14 @@ export const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
   };
 
   return (
-    <Card className="w-full bg-slate-700">
+    <Card className="w-full bg-[#101c3f] bg-opacity-45">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">
+        <CardTitle className="text-sm font-medium text-slate-400">
           {new Date(message.createdAt).toLocaleString()}
         </CardTitle>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive" size="sm" disabled={isDeleting}>
+            <Button variant="destructive" className="hover:bg-white/10 " size="sm" disabled={isDeleting}>
               <Trash2 className="h-4 w-4" />
             </Button>
           </AlertDialogTrigger>
@@ -89,12 +89,11 @@ export const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
         </AlertDialog>
       </CardHeader>
       <CardContent>
-        <p className="text-2xl text-black font-semibold ">
+        <p className="text-2xl text-white font-semibold ">
           {message.content}
         </p>
       </CardContent>
       <CardFooter>
-        {/* Add any additional footer content here if needed */}
       </CardFooter>
     </Card>
   );
