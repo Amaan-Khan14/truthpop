@@ -1,5 +1,5 @@
 import { dbConnect } from "@/lib/dbConnect";
-import { getServerSession, User } from "next-auth";
+import { getServerSession } from "next-auth";
 import { NextRequest } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/option";
 import { UserModel } from "@/model/user";
@@ -25,9 +25,9 @@ export async function POST(req: NextRequest) {
     const { isAcceptingMessages } = await req.json()
     try {
         const updatedUser = await UserModel.findByIdAndUpdate({
-            _id:userId
+            _id: userId
         }, {
-            isAcceptingMessages:isAcceptingMessages
+            isAcceptingMessages: isAcceptingMessages
         }, {
             new: true
         })
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
     }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     await dbConnect();
 
     const session = await getServerSession(authOptions)

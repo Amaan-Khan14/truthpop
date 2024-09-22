@@ -1,14 +1,11 @@
 "use client";
 import { useToast } from "@/hooks/use-toast";
-import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDebounceCallback, useDebounceValue } from "usehooks-ts";
+import { useDebounceCallback } from "usehooks-ts";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { set } from "mongoose";
-import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/apiResponse";
 import { signUpSchema } from "@/validator/signUp";
 import TopLeftSVG from "../../left.svg";
@@ -16,18 +13,16 @@ import BottomRightSVG from "../../right.svg";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link, Loader2, Lock, Mail, User } from "lucide-react";
+import { Loader2, Lock, Mail, User } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import Anonymous from "../../../../public/anonymous.png";
+import axios, { AxiosError } from "axios";
 
 export default function Component() {
   const [username, setUsername] = useState("");

@@ -1,7 +1,6 @@
 "use client";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import Image from "next/image";
-import Link from "next/link";
 import Anonymous from "../../public/anonymous.png";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -120,7 +119,7 @@ export default function Home() {
               </h2>
               <p>
                 Your friends can send anonymous messages without creating an
-                account. It's that simple!
+                account. It is that simple!
               </p>
             </GlareCard>
             <GlareCard className="p-6 flex flex-col justify-center">

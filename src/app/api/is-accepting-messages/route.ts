@@ -1,8 +1,4 @@
 import { NextRequest } from 'next/server';
-import { getServerSession } from "next-auth/next";
-
-import mongoose from 'mongoose';
-import { authOptions } from '../auth/[...nextauth]/option';
 import { dbConnect } from '@/lib/dbConnect';
 import { UserModel } from '@/model/user';
 

@@ -21,7 +21,7 @@ export default function SendMessage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [isAcceptingMessages, setIsAcceptingMessages] = useState(true);
-  const [isCheckingRecipient, setIsCheckingRecipient] = useState(true);
+  const [, setIsCheckingRecipient] = useState(true);
 
   const params = useParams();
   const { toast } = useToast();

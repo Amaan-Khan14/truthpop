@@ -30,7 +30,6 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Image from "next/image";
 import Anonymous from "../../../../../public/anonymous.png";
-import Link from "next/link";
 
 export default function VerifyPage() {
   const router = useRouter();

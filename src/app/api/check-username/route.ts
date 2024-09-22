@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     try {
         const { searchParams } = new URL(req.url);
 
-        let username = searchParams.get("username");
+        const username = searchParams.get("username");
         console.log(username);
         const queryParam = {
             username

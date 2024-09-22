@@ -13,7 +13,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
 } from "@/components/ui/form";
 import TopLeftSVG from "../../left.svg";
 import BottomRightSVG from "../../right.svg";
@@ -157,7 +156,7 @@ export default function SignInComponent() {
         <CardFooter className="bg-black/20 rounded-b-lg">
           <div className="w-full text-center mt-5">
             <p className="text-sm text-white">
-              Don't have an account?{" "}
+              Dont have an account?{" "}
               <a
                 href="/signup"
                 className="font-medium text-indigo-300 hover:text-indigo-200 transition-colors"
