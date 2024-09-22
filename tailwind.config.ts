@@ -18,7 +18,8 @@ const config = {
 			}
 		},
 		"animation": {
-			shimmer: "shimmer 2s linear infinite"
+			shimmer: "shimmer 2s linear infinite",
+			spin: "spin 1s  infinite"
 		},
 		"keyframes": {
 			shimmer: {
@@ -27,6 +28,14 @@ const config = {
 				},
 				to: {
 					"backgroundPosition": "-200% 0"
+				}
+			},
+			spin: {
+				from: {
+					transform: "rotate(0deg)"
+				},
+				to: {
+					transform: "rotate(360deg)"
 				}
 			}
 		}, extend: {
