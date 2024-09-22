@@ -23,7 +23,6 @@ export default function Dashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
-  const router = useRouter();
   const { toast } = useToast();
   const { data: session } = useSession();
 
@@ -34,7 +33,7 @@ export default function Dashboard() {
     },
   });
 
-  const { register, watch, setValue } = form;
+  const {  watch, setValue } = form;
   const acceptMessages = watch("acceptMessages");
   console.log(session);
   const fetchAcceptMessages = useCallback(async () => {
