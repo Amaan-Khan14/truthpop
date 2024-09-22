@@ -25,7 +25,10 @@ export const VerifyEmail: React.FC<VerifyEmailProps> = ({ username, otp }) => {
           <Text style={paragraphStyle}>Hello {username},</Text>
           <Text style={paragraphStyle}>Your OTP for authentication is:</Text>
           <Text style={otpStyle}>{otp}</Text>
-          <Button style={buttonStyle} href="https://yourapp.com/verify">
+          <Button
+            style={buttonStyle}
+            href={`https://truthpop.amaanis.live/verify-email/${username}`}
+          >
             Verify OTP
           </Button>
           <Text style={footerStyle}>
