@@ -17,7 +17,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
