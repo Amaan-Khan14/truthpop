@@ -175,7 +175,7 @@ export default function Home() {
               <CarouselNext className="bg-white/10 hidden sm:flex" />
             </Carousel>
           </div>
-          <Separator className="bg-white/20 mt-5" />
+          <Separator className="bg-white/20 mt-14" />
           <h2 className="text-3xl font-bold my-12">Ready to get started?</h2>
           <Button
             onClick={() => handleNavigation("/signup")}
