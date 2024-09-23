@@ -17,6 +17,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Dashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -32,7 +33,7 @@ export default function Dashboard() {
     },
   });
 
-  const {  watch, setValue } = form;
+  const { watch, setValue } = form;
   const acceptMessages = watch("acceptMessages");
   console.log(session);
   const fetchAcceptMessages = useCallback(async () => {
@@ -133,10 +134,14 @@ export default function Dashboard() {
               </p>
               <div className="flex justify-center space-x-3 mt-2 items-center">
                 <Link href="/signin">
-                  <Button className="bg-white/10 hover:bg-white hover:text-black">Log in</Button>
+                  <Button className="bg-white/10 hover:bg-white hover:text-black">
+                    Log in
+                  </Button>
                 </Link>
                 <Link href="/">
-                  <Button className="bg-white/10 hover:bg-white hover:text-black">Home</Button>
+                  <Button className="bg-white/10 hover:bg-white hover:text-black">
+                    Home
+                  </Button>
                 </Link>
               </div>
             </CardContent>
@@ -235,15 +240,17 @@ export default function Dashboard() {
                   <Loader2 className="h-8 w-8 animate-spin text-white" />
                 </div>
               ) : messages.length > 0 ? (
-                <div className="space-y-4">
-                  {messages.map((message) => (
-                    <MessageCard
-                      key={message._id as Key}
-                      message={message}
-                      onMessageDelete={handleDeleteMessage}
-                    />
-                  ))}
-                </div>
+                <ScrollArea className="h-96 w-full p-2 border-white/10 rounded-md border">
+                  <div className="space-y-4">
+                    {messages.map((message) => (
+                      <MessageCard
+                        key={message._id as Key}
+                        message={message}
+                        onMessageDelete={handleDeleteMessage}
+                      />
+                    ))}
+                  </div>
+                </ScrollArea>
               ) : (
                 <p className="text-center text-slate-400">No messages yet.</p>
               )}

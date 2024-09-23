@@ -24,6 +24,7 @@ import { Message } from "@/model/user";
 import axios from "axios";
 import { ApiResponse } from "@/types/apiResponse";
 import { useToast } from "@/hooks/use-toast";
+import { Separator } from "./ui/separator";
 
 type MessageCardProps = {
   message: Message;
@@ -57,7 +58,8 @@ export const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
   };
 
   return (
-    <Card className="w-full bg-[#101c3f] bg-opacity-45">
+    <div>
+    <Card className="w-full bg-[#101c3f] border-white/10 bg-opacity-45">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium text-slate-400">
           {new Date(message.createdAt).toLocaleString()}
@@ -96,5 +98,7 @@ export const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
       <CardFooter>
       </CardFooter>
     </Card>
+    <Separator className="my-2 bg-white/50"/>
+    </div>
   );
 };
