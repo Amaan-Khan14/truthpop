@@ -1,3 +1,4 @@
+"use client"
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import Image from "next/image";
 import Anonymous from "../../public/anonymous.png";
